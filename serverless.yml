@@ -1,0 +1,79 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+org: leonera
+app: leonera-api-admin
+service: leonera-api-area
+
+
+provider:
+      name: aws
+      runtime: dotnet6
+      stage: ${opt:stage, 'dev'}
+      region: us-east-1
+
+package:
+  individually: true
+
+functions:
+  get:
+    handler: AwsDotnetCsharp::AwsDotnetCsharp.Handler::Get
+
+    package:
+      artifact: bin/release/net6.0/hello.zip
+    events:
+      - http:
+          path: get
+          method: get
+          cors: true
+  getById:
+    handler: AwsDotnetCsharp::AwsDotnetCsharp.Handler::GetById
+
+    package:
+      artifact: bin/release/net6.0/hello.zip
+    events:
+      - http:
+          path: getById
+          method: get
+          cors: true
+  create:
+    handler: AwsDotnetCsharp::AwsDotnetCsharp.Handler::Create
+
+    package:
+      artifact: bin/release/net6.0/hello.zip
+    events:
+      - http:
+          path: create
+          method: post
+          cors: true
+  update:
+    handler: AwsDotnetCsharp::AwsDotnetCsharp.Handler::Update
+
+    package:
+      artifact: bin/release/net6.0/hello.zip
+    events:
+      - http:
+          path: update
+          method: put
+          cors: true
+  delete:
+    handler: AwsDotnetCsharp::AwsDotnetCsharp.Handler::Delete
+
+    package:
+      artifact: bin/release/net6.0/hello.zip
+    events:
+      - http:
+          path: delete
+          method: delete
+          cors: true
+
